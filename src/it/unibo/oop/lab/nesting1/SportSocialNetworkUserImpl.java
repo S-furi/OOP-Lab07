@@ -4,6 +4,7 @@
 package it.unibo.oop.lab.nesting1;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import it.unibo.oop.lab.socialnetwork.SocialNetworkUserImpl;
@@ -53,12 +54,12 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      * TODO: initialize properly these sports
      */
     static {
-        SOCCER = null;
-        F1 = null;
-        MOTOGP = null;
-        VOLLEY = null;
-        BASKET = null;
-        BIKE = null;
+        SOCCER = new Sport("Soccer");
+        F1 = new Sport("F1");
+        MOTOGP = new Sport("MotoGP");
+        VOLLEY = new Sport("Volley");
+        BASKET = new Sport("Basket");
+        BIKE = new Sport("Bikeß");
     }
 
     /**
@@ -109,12 +110,12 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      * Add a new sport followed by this user: if the user already likes or does
      * the sport, nothing happens.
      * 
-     * @param sport
+     * @param f12
      *            a sport followed/done by the user
      */
     // TODO
-    public void addSport(final Sport sport) {
-
+    public void addSport(final Sport f12) {
+    	this.sports.add(f12);
     }
 
     /**
@@ -126,7 +127,7 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      */
     // TODO
     public boolean hasSport(final Sport s) {
-        return false;
+        return this.sports.contains(s);
     }
 
     /*
@@ -135,16 +136,42 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      * Complete the definition of this static inner class defining a Sport along
      * with its bare name.
      */
+    
+    /**
+     * Constructor of a new sport, given the name
+     * 
+     * @param name
+     * 			name of the sport
+     */
     public static final class Sport {
+    	
+    	private final String name;
+    	
+    	public Sport(String name) {
+    		this.name = name;
+    	}
         /*
          * TODO
          * 
          * Redefine equals so that two sports are equal only if they feature the
          * very same name. Remember that you must also redefine hashCode()!
          */
-        @Override
-        public boolean equals(final Object o) {
-            return false;
-        }
+
+		@Override
+		public int hashCode() {
+			return Objects.hash(name);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Sport other = (Sport) obj;
+			return Objects.equals(name, other.name);
+		}
     }
 }

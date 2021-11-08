@@ -37,6 +37,14 @@ public enum Sport {
      * - soccer
      * 
      */
+	
+	BAKSET(Place.INDOOR, 5, "Basket"),
+	VOLLEY(Place.INDOOR, 5, "Volley"),
+	TENNIS(Place.OUTDOOR, 2, "Tennis"),
+	BIKE(Place.OUTDOOR, 1, "Bike"),
+	F1(Place.OUTDOOR, 1, "F1"),
+	MOTOGP(Place.OUTDOOR, 1, "MotoGP"),
+	SOCCER(Place.OUTDOOR, 11, "Soccer");
 
     /*
      * TODO
@@ -45,6 +53,11 @@ public enum Sport {
      * 
      * Declare required fields
      */
+	
+	private final Place place;
+	private final int noTeamMembers;
+	private final String name;
+	
 
     /*
      * TODO
@@ -55,6 +68,12 @@ public enum Sport {
      * 
      * - Sport(final Place place, final int noTeamMembers, final String actualName)
      */
+	
+	private Sport(final Place place, final int noTeamMembers, final String actualName) {
+		this.place = place;
+		this.noTeamMembers = noTeamMembers;
+		this.name = actualName;
+	}
 
     /*
      * TODO
@@ -65,20 +84,37 @@ public enum Sport {
      * 1) public boolean isIndividualSport()
      * 
      * Must return true only if called on individual sports
-     * 
-     * 
+     */
+	public boolean isIndividualSport() {
+		return (this.noTeamMembers == 1);
+	}
+     /* 
      * 2) public boolean isIndoorSport()
      * 
      * Must return true in case the sport is practices indoor
      * 
-     * 
-     * 3) public Place getPlace()
+     */
+	public boolean isIndoorSport() {
+		return (this.place == Place.INDOOR);
+	}
+     /* 3) public Place getPlace()
      * 
      * Must return the place where this sport is practiced
      * 
-     * 
-     * 4) public String toString()
+     */
+	public Place getPlace() {
+		return this.place;
+	}
+     /* 4) public String toString()
      * 
      * Returns the string representation of a sport
      */
+	
+	public String toString() {
+		return this.name + " is an " + this.getPlace() + " sport and it's played by " + 
+				(this.isIndividualSport() == true ? "one person" : this.noTeamMembers + " people");
+	}
+	
+	
+	
 }

@@ -30,7 +30,7 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      * 
      * add a field to keep track of the set of sports followed/done by a user
      */
-
+	java.util.Collection<Sport> sports = new java.util.HashSet<>();
     /**
      * Builds a new {@link SportSocialNetworkUserImpl}.
      * 
@@ -77,8 +77,10 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      *            a sport followed/done by the user
      */
     // TODO
-    public void addSport(final Sport sport) {
-
+    public void addSport(final it.unibo.oop.lab.enum1.Sport sport) {
+    	if(!this.sports.contains(sport)) {
+    		this.sports.add(sport);
+    	}
     }
 
     /**
@@ -90,6 +92,6 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      * @return true if the user likes sport s
      */
     public boolean hasSport(final Sport s) {
-        return false;
+        return this.sports.contains(s);
     }
 }
